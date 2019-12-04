@@ -21,7 +21,7 @@ class TransactionRoundUpCalculator extends React.Component {
 
     render(){
         return(
-        <div>{this.state.totalRoundUpAmount}</div>
+        <div>Roundup To Transfer To Savings Account : ${this.state.totalRoundUpAmount}</div>
         )
     }
 }

@@ -1,22 +1,23 @@
 import * as React from "react";
 
 import { AppContext } from "./AppContext";
-import CharityCallout from "./CharityCallout";
+import CharityCallout from "./Components/CharityCallout";
 
 export function App() {
-  let { state, dispatch } = React.useContext(AppContext);
+    let { state, dispatch } = React.useContext(AppContext);
 
-  React.useEffect(
-    () => {
-      document.body.style.backgroundColor = state.currentColor;
-    },
-    [state.currentColor]
-  );
+    React.useEffect(
+        () => {
+            document.body.style.backgroundColor = state.currentColor;
+        },
+        [state.currentColor]
+    );
 
-  let inc = () => dispatch({ type: "increment" });
-  let dec = () => dispatch({ type: "decrement" });
-  let reset = () => dispatch({ type: "reset" });
-  let setColor = color => () => dispatch({ type: "set-color", payload: color });
+    let inc = () => dispatch({ type: "increment" });
+    let dec = () => dispatch({ type: "decrement" });
+    let reset = () => dispatch({ type: "reset" });
+    let setColor = color => () => dispatch({ type: "set-color", payload: color });
+
 
   return (
     <React.Fragment>
@@ -46,3 +47,4 @@ export function App() {
     </React.Fragment>
   );
 }
+

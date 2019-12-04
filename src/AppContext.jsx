@@ -10,6 +10,7 @@ let initialState = {
   charityPercentage: 0,
   fromAccount: null,
   toAccount: null,
+  percentage: 5,
   fromAccounts:
     [
       {
@@ -73,6 +74,8 @@ let reducer = (state, action) => {
       return { ...state, labelFromWidth: action.payload };
     case "set-tolabel-width":
       return { ...state, labelToWidth: action.payload };
+    case "slider-percentage":
+      return { ...state, percentage: action.payload };
   }
 };
 

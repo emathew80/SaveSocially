@@ -1,55 +1,39 @@
 import * as React from "react";
 
-import { AppContext } from "./AppContext";
 import CharityCallout from "./Components/CharityCallout";
 import Settings from "./Components/Settings";
 import ActivityList from './Components/ActivityList';
+import MainLayout from './Components/MainLayout';
+import Container from '@material-ui/core/Container';
+
 import './App.css';
 import TransactionRoundUpCalculator from "./Components/TransactionRoundUpCalculator";
 
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { blue } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+    palette: {
+        type: 'dark',
+        primary: { main: blue[200] }, // Purple and green play nicely together.
+        secondary: { main: '#11cb5f' }, // This is just green.A700 as hex.
+    },
+});
+
 export function App() {
-    let { state, dispatch } = React.useContext(AppContext);
-
-    React.useEffect(
-        () => {
-            document.body.style.backgroundColor = state.currentColor;
-        },
-        [state.currentColor]
-    );
-
-    let inc = () => dispatch({ type: "increment" });
-    let dec = () => dispatch({ type: "decrement" });
-    let reset = () => dispatch({ type: "reset" });
-    let setColor = color => () => dispatch({ type: "set-color", payload: color });
-
     return (
         <div className="App">
-            <CharityCallout/>
-            <TransactionRoundUpCalculator/>
-            <div style={{ textAlign: "center" }}>
-                <p>
-                    Current color is: <b>{state.currentColor}</b>
-                </p>
-                <p>
-                    Current count: <b>{state.count}</b>
-                </p>
-            </div>
-            <div style={{ paddingTop: 40 }}>
-                <p>Count controls:</p>
-                <button onClick={inc}>Increment!</button>
-                <button onClick={dec}>Decrement!</button>
-            </div>
-            <div>
-                <p>Color controls:</p>
-                <button onClick={setColor("green")}>Change to green!</button>
-                <button onClick={setColor("papayawhip")}>Change to papayawhip!</button>
-            </div>
-            <div>
-                <p>Reset changes:</p>
-                <button onClick={reset}>Reset!</button>
-            </div>
-            <ActivityList />
-            <Settings />
+            <ThemeProvider theme={theme}>
+                <MainLayout>
+                    <Container>
+                        <CharityCallout />
+                        <TransactionRoundUpCalculator/>
+                        <ActivityList />
+                        <Settings />
+                    </Container>
+                </MainLayout>
+            </ThemeProvider>
         </div>
     );
 }

@@ -1,7 +1,11 @@
 import * as React from "react";
 
 import { AppContext } from "./AppContext";
+<<<<<<< HEAD
 import CharityCallout from "./Components/CharityCallout";
+=======
+import Settings from "./Components/Settings";
+>>>>>>> Implement Settings componenet
 
 export function App() {
     let { state, dispatch } = React.useContext(AppContext);
@@ -44,7 +48,11 @@ export function App() {
         <p>Reset changes:</p>
         <button onClick={reset}>Reset!</button>
       </div>
+      <Settings/>
     </React.Fragment>
   );
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> Implement Settings componenet

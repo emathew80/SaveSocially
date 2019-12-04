@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { AppContext } from "./AppContext";
+import CharityCallout from "./CharityCallout";
 
 export function App() {
   let { state, dispatch } = React.useContext(AppContext);
@@ -19,6 +20,7 @@ export function App() {
 
   return (
     <React.Fragment>
+      <CharityCallout/>
       <div style={{ textAlign: "center" }}>
         <p>
           Current color is: <b>{state.currentColor}</b>

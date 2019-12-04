@@ -73,6 +73,13 @@ function Settings() {
     payload:  state.toAccounts.find(obj => obj.accountId === accountId)
   });
 
+    let setSliderPercentage = percentage => {
+        dispatch({
+            type: "slider-percentage",
+            payload: percentage
+        })
+    }
+
   let setLabelWidth = () => {
     return (dispatch({
     type: 'set-tolabel-width',
@@ -149,8 +156,10 @@ function Settings() {
           marks={marks}
           min={1}
           max={100}
+          value={state.percentage}
           valueLabelFormat={valueLabelFormat}
           valueLabelDisplay="auto"
+          onChange={(e, value) => setSliderPercentage(value)}
         />
       </FormControl>
     </div>

@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from "react";
 
-function App() {
+import { AppContext } from "./AppContext";
+
+export function App() {
+  let { state, dispatch } = React.useContext(AppContext);
+
+  React.useEffect(
+    () => {
+      document.body.style.backgroundColor = state.currentColor;
+    },
+    [state.currentColor]
+  );
+
+  let inc = () => dispatch({ type: "increment" });
+  let dec = () => dispatch({ type: "decrement" });
+  let reset = () => dispatch({ type: "reset" });
+  let setColor = color => () => dispatch({ type: "set-color", payload: color });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <React.Fragment>
+      <div style={{ textAlign: "center" }}>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Current color is: <b>{state.currentColor}</b>
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <p>
+          Current count: <b>{state.count}</b>
+        </p>
+      </div>
+      <div style={{ paddingTop: 40 }}>
+        <p>Count controls:</p>
+        <button onClick={inc}>Increment!</button>
+        <button onClick={dec}>Decrement!</button>
+      </div>
+      <div>
+        <p>Color controls:</p>
+        <button onClick={setColor("green")}>Change to green!</button>
+        <button onClick={setColor("papayawhip")}>Change to papayawhip!</button>
+      </div>
+      <div>
+        <p>Reset changes:</p>
+        <button onClick={reset}>Reset!</button>
+      </div>
+    </React.Fragment>
   );
 }
-
-export default App;

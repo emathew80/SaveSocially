@@ -5,6 +5,7 @@ import CharityCallout from "./Components/CharityCallout";
 import Settings from "./Components/Settings";
 import ActivityList from './Components/ActivityList';
 import './App.css';
+import TransactionRoundUpCalculator from "./Components/TransactionRoundUpCalculator";
 
 export function App() {
     let { state, dispatch } = React.useContext(AppContext);
@@ -23,7 +24,8 @@ export function App() {
 
     return (
         <div className="App">
-            <CharityCallout />
+            <CharityCallout/>
+            <TransactionRoundUpCalculator/>
             <div style={{ textAlign: "center" }}>
                 <p>
                     Current color is: <b>{state.currentColor}</b>

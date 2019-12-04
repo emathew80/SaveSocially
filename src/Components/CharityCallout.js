@@ -6,7 +6,7 @@ class CharityCallout extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            allOrgsHasTable:[]
+            allOrgsHashTable:[]
         }
         this.charitySearch= this.charitySearch.bind(this)
     }
@@ -19,14 +19,14 @@ class CharityCallout extends React.Component {
         fetch(proxyUrl + targetUrl)
         .then(blob => blob.json())
         .then(data => {
-            const prevHashTable = this.state.allOrgsHasTable
+            const prevHashTable = this.state.allOrgsHashTable
             const orgHashTable= {}
             data.organizations.forEach(element => {
                 orgHashTable[element.name] = element.ein
             });
             const combinedHashTable = Object.assign({},prevHashTable,orgHashTable)
             this.setState({
-                allOrgsHasTable: combinedHashTable
+                allOrgsHashTable: combinedHashTable
             })
             return data;
         })
@@ -37,14 +37,14 @@ class CharityCallout extends React.Component {
     }
 
     render(){
-        console.log(this.state.allOrgsHasTable)
+        console.log(this.state.allOrgsHashTable)
         return (
 
             <React.Fragment>
                 <Autocomplete
                     id="free-solo-2-demo"
                     disableClearable
-                    options={Object.keys(this.state.allOrgsHasTable).map(orgName => orgName )}
+                    options={Object.keys(this.state.allOrgsHashTable).map(orgName => orgName )}
                     renderInput={params => (
                     <TextField
                         {...params}

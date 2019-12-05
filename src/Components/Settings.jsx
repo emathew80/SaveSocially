@@ -60,13 +60,6 @@ function Settings() {
         payload:   value / Math.pow(10, 2)
     });
 
-    let setSliderPercentage = percentage => {
-        dispatch({
-            type: "slider-percentage",
-            payload: percentage
-        })
-    }
-
   let setLabelWidth = () => {
     return (dispatch({
                 type: 'set-tolabel-width',
@@ -153,7 +146,6 @@ function Settings() {
           value={state.percentage}
           valueLabelFormat={valueLabelFormat}
           valueLabelDisplay="auto"
-          onChange={(e, value) => setSliderPercentage(value)}
         />
       </FormControl>
     </div>

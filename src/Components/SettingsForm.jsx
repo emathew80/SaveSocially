@@ -16,6 +16,7 @@ import { Save, Edit } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppContext } from "../AppContext";
 import { red } from '@material-ui/core/colors';
+import has from 'has-value';
 
 const useStyles = makeStyles(theme => ({
     form: {
@@ -138,7 +139,6 @@ function SettingsForm() {
         dispatch({ type: "set-form-error", payload: false })
 
         if (!state.toAccount || !state.fromAccount) {
-            console.log('in here')
             return dispatch({ type: "set-form-error", payload: true })
         }
 
@@ -152,6 +152,7 @@ function SettingsForm() {
     const inputLabelTo = React.useRef(null);
 
     React.useEffect(() => {
+        if (!has(inputLabelTo, 'current.offsetWidth') || !has(inputLabelFrom, 'current.offsetWidth')) return;
         dispatch({
             type: 'set-tolabel-width',
             payload: inputLabelTo.current.offsetWidth

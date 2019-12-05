@@ -37,7 +37,6 @@ export default function ActivityList({ transactions }) {
         }));
 
         if (mappedTransactions && mappedTransactions.length) {
-            console.log('doing')
             const total = mappedTransactions
                 .map(transaction => parseFloat(transaction.roundupAmount))
                 .reduce((prev, curr) => prev + curr)

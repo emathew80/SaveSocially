@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CharityCallout from './CharityCallout';
 import Paper from '@material-ui/core/Paper';
@@ -41,9 +39,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function CharityCard() {
-    let { state, dispatch } = React.useContext(AppContext);
+    let { state } = React.useContext(AppContext);
     const classes = useStyles();
-    const bull = <span className={classes.bullet}>•</span>;
     const pertOrgDetails = ["name", "ein", "address", "income_amount", "ntee_code"]
     const filteredProperties = Object.keys(state.selectedOrganizationDetails).filter(value => pertOrgDetails.includes(value))
     return (

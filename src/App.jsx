@@ -3,6 +3,7 @@ import * as React from "react";
 import CharityCallout from "./Components/CharityCallout";
 import Settings from "./Components/Settings";
 import ActivityList from './Components/ActivityList';
+import CharityCard from './Components/CharityCard';
 import MainLayout from './Components/MainLayout';
 import Container from '@material-ui/core/Container';
 
@@ -27,10 +28,10 @@ export function App() {
             <ThemeProvider theme={theme}>
                 <MainLayout>
                     <Container>
-                        <CharityCallout />
-                        <TransactionRoundUpCalculator/>
+                        <TransactionRoundUpCalculator />
                         <ActivityList />
                         <Settings />
+                        <CharityCard />
                     </Container>
                 </MainLayout>
             </ThemeProvider>

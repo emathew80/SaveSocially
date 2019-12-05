@@ -12,15 +12,17 @@ let initialState = {
     edit: true,
     proxyUrl: 'https://cors-anywhere.herokuapp.com/',
     baseProPublicaUrl: 'https://projects.propublica.org/nonprofits/api/v2/',
-    fromAccount: null,
-    toAccount: null,
+    fromAccount: '',
+    toAccount: '',
+    consumerId: '833',
     allOrgsHashTable: [],
     totalRoundUpAmount:0,
     selectedOrganizationDetails: [],
+    transactions: [],
     fromAccounts:
         [
             {
-                "accountId": "10020",
+                "accountId": "10098",
                 "accountType": "CHK",
                 "nickname": "My account",
                 "formattedAccountNumber": "(...6001)"
@@ -42,7 +44,7 @@ let initialState = {
     ,
     toAccounts: [
         {
-            "accountId": "10023",
+            "accountId": "10101",
             "accountType": "SAV",
             "nickname": "Developer Lines of Credit",
             "formattedAccountNumber": "(...1210)"
@@ -88,10 +90,12 @@ let reducer = (state, action) => {
             return { ...state, proxyUrl: action.payload };
         case "set-baseProPublicaUrl":
             return { ...state, baseProPublicaUrl: action.payload };
+        case "set-transactions":
+            return { ...state, transactions: action.payload };
         case "set-selectedOrganizationDetails":
             return { ...state, selectedOrganizationDetails: action.payload };
         case "set-submit":
-            return { ...state, submitted: action.payload,  edit: !action.payload };
+            return { ...state, submitted: action.payload, edit: !action.payload };
         case "set-edit":
             return { ...state, edit: action.payload, submitted: !action.payload };
         case "set-totalRoundUpAmount":

@@ -2,6 +2,9 @@ import * as React from "react";
 
 import MainLayout from './Components/MainLayout';
 
+import TransactionContainer from './Components/TransactionContainer';
+import { AppContext } from './AppContext';
+
 import './App.css';
 
 
@@ -18,6 +21,7 @@ const theme = createMuiTheme({
 });
 
 export function App() {
+    let { state } = React.useContext(AppContext);
     return (
         <div className="App">
             <ThemeProvider theme={theme}>

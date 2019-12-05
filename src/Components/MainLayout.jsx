@@ -17,14 +17,12 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { getThemeProps } from '@material-ui/styles';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import Container from '@material-ui/core/Container';
 
 import Settings from "./Settings";
-import ActivityList from './ActivityList';
-import TransactionRoundUpCalculator from "./TransactionRoundUpCalculator";
+import Dashboard from './Dashboard';
 
 const drawerWidth = 240;
 
@@ -141,13 +139,13 @@ export default function MainLayout({ children }) {
                         <Link to='/'>
                             <ListItem button>
                                 <ListItemIcon><DashboardIcon /></ListItemIcon>
-                                <ListItemText primary="Settings" />
+                                <ListItemText primary="Dashboard" />
                             </ListItem>
                         </Link>
-                        <Link to='/activity'>
+                        <Link to='/settings'>
                             <ListItem button>
                                 <ListItemIcon><SettingsIcon /></ListItemIcon>
-                                <ListItemText primary="Activity" />
+                                <ListItemText primary="Settings" />
                             </ListItem>
                         </Link>
                     </List>
@@ -158,12 +156,12 @@ export default function MainLayout({ children }) {
                     })}
                 >
                     <div className={classes.drawerHeader} />
-                        <Container>
-                            <Switch>
-                                <Route path='/' exact component={Settings} />
-                                <Route path='/activity' component={ActivityList} />
-                            </Switch>
-                        </Container>
+                    <Container>
+                        <Switch>
+                            <Route path='/' exact component={Dashboard} />
+                            <Route path='/settings' component={Settings} />
+                        </Switch>
+                    </Container>
                 </main>
             </div>
         </BrowserRouter>

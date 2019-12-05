@@ -1,34 +1,53 @@
 import React from 'react';
 import MaterialTable from 'material-table';
 
-export default function ActivityList() {
-    const [state, setState] = React.useState({
-        columns: [
-            { title: 'Name', field: 'name' },
-            { title: 'Surname', field: 'surname' },
-            { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-            {
-                title: 'Birth Place',
-                field: 'birthCity',
-                lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
-            },
-        ],
-        data: [
-            { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-            {
-                name: 'Zerya Betül',
-                surname: 'Baran',
-                birthYear: 2017,
-                birthCity: 34,
-            },
-        ],
-    });
+export default function ActivityList({ transactions }) {
+    const columns = [
+        {
+            title: 'Date',
+            field: 'transactionDate'
+        },
+        {
+            title: 'Account',
+            field: 'accountId'
+        },
+        {
+            title: 'Description',
+            field: 'description',
+        },
+        {
+            title: 'Amount',
+            field: 'transactionAmount',
+            type: 'numeric'
+        },
+        {
+            title: 'Roundup Amt',
+            field: 'roundupAmount',
+            type: 'numeric'
+        },
+    ]
+
+    const mappedTransactions = transactions.map(transaction => ({
+        ...transaction,
+        transactionAmount: parseFloat(transaction.transactionAmount).toFixed(2),
+        roundupAmount: parseFloat((Math.ceil(transaction.transactionAmount) - transaction.transactionAmount)).toFixed(2)
+    }));
+
+    const totalRoundup = () => {
+        if (mappedTransactions && mappedTransactions.length) {
+            return mappedTransactions
+                .map(transaction => parseFloat(transaction.roundupAmount))
+                .reduce((prev, curr) => prev + curr)
+                .toFixed(2);
+        }
+        return 0;
+    }
 
     return (
         <MaterialTable
-            title="Editable Example"
-            columns={state.columns}
-            data={state.data}
+            title={`Transactions - Total Roundup ($${totalRoundup()})`}
+            columns={columns}
+            data={mappedTransactions}
         />
     );
 }

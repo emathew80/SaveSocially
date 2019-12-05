@@ -46,10 +46,14 @@ export default function CharityCard() {
     return (
         <Card className={classes.card}>
             <CardContent>
+                <Typography variant="h6" className={classes.formLabel} align="center">
+                    Organization Details
+                </Typography>
                 <CharityCallout />
                 <Grid container spacing={3} className={classes.gridRoot}>
                     <Grid item xs={12}>
                         <Paper className={classes.paper}>
+                            {(!filteredProperties || !filteredProperties.length) ? <span>No Organization Selected</span> : null}
                             <Grid container spacing={3}>
                                 <Grid item xs={6}>
                                     {filteredProperties.filter((_, index) => index <= 2).map((item, index) => {

@@ -285,7 +285,7 @@ function SettingsForm() {
     return (
         <Card className={classes.card}>
             <CardContent>
-                <Grid container spacing={3} className={classes.gridRoot}>
+                <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Grid justify='center' container spacing={3}>
                             <Grid item xs={12}>

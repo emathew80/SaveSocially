@@ -5,11 +5,10 @@ import { AppContext } from "../AppContext";
 
 function CharityCallout() {
     let { state, dispatch } = React.useContext(AppContext);
-
     const charitySearch = (event) => {
-        var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
-            targetUrl = `https://projects.propublica.org/nonprofits/api/v2/search.json?q=${event.target.value}`
-        fetch(proxyUrl + targetUrl)
+       var targetUrl = state.baseProPublicaUrl + `search.json?q=${event.target.value}`
+
+        fetch(state.proxyUrl + targetUrl)
             .then(blob => blob.json())
             .then(data => {
                 const prevHashTable = state.allOrgsHashTable
@@ -31,7 +30,20 @@ function CharityCallout() {
     }
 
     const autoCompleteOnChangeHandler = (_, value) => {
-        console.log(state.allOrgsHashTable);
+        const targetUrl = state.baseProPublicaUrl + `organizations/${state.allOrgsHashTable[value]}.json`
+        fetch(state.proxyUrl + targetUrl)
+            .then(blob => blob.json())
+            .then(data => {
+                dispatch({
+                    type: 'set-selectedOrganizationDetails',
+                    payload: data.organization,
+                })
+                return data;
+            })
+            .catch(e => {
+                console.log(e);
+                return e;
+            });
     }
 
     return (

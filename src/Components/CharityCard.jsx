@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import CharityCallout from './CharityCallout';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { AppContext } from "../AppContext";
+
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -39,9 +41,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function CharityCard() {
+    let { state, dispatch } = React.useContext(AppContext);
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
-
+    const pertOrgDetails = ["name", "ein", "address", "income_amount", "ntee_code"]
+    const filteredProperties = Object.keys(state.selectedOrganizationDetails).filter(value => pertOrgDetails.includes(value))
+    console.log("Org Details", state.selectedOrganizationDetails)
     return (
         <Card className={classes.card}>
             <CardContent>
@@ -51,33 +56,34 @@ export default function CharityCard() {
                         <Paper className={classes.paper}>
                             <Grid container spacing={3}>
                                 <Grid item xs={6}>
-                                    {['Stuff1', 'Stuff2', 'Stuff3', 'Stuff4', 'Stuff5', 'Stuff6'].filter((_, index) => index <= 2).map((item, index) => {
+                                    {filteredProperties.filter((_, index) => index <= 2).map((item, index) => {
                                         if (index !== 0) {
                                             return (
                                                 <Typography align="left" className={classes.orgDetailItem}>
-                                                    {item}
+                                                    {item}: {state.selectedOrganizationDetails[item]}
                                                 </Typography>
                                             )
                                         }
                                         return (
                                             <Typography align="left">
-                                                {item}
+                                                {item}: {state.selectedOrganizationDetails[item]}
+
                                             </Typography>
                                         )
                                     })}
                                 </Grid>
                                 <Grid item xs={6}>
-                                    {['Stuff1', 'Stuff2', 'Stuff3', 'Stuff4', 'Stuff5', 'Stuff6'].filter((_, index) => index > 2).map((item, index) => {
+                                    {filteredProperties.filter((_, index) => index > 2).map((item, index) => {
                                         if (index !== 0) {
                                             return (
                                                 <Typography align="right" className={classes.orgDetailItem}>
-                                                    {item}
+                                                    {item}: {state.selectedOrganizationDetails[item]}
                                                 </Typography>
                                             )
                                         }
                                         return (
                                             <Typography align="right">
-                                                {item}
+                                                {item}: {state.selectedOrganizationDetails[item]}
                                             </Typography>
                                         )
                                     })}

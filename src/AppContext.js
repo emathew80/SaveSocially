@@ -8,9 +8,12 @@ let initialState = {
     labelToWidth: 0,
     labelFromWidth: 0,
     donationPercentage: 0.05,
+    proxyUrl: 'https://cors-anywhere.herokuapp.com/',
+    baseProPublicaUrl: 'https://projects.propublica.org/nonprofits/api/v2/',
     fromAccount: null,
     toAccount: null,
     allOrgsHashTable: [],
+    selectedOrganizationDetails: [],
     fromAccounts:
         [
             {
@@ -78,6 +81,12 @@ let reducer = (state, action) => {
             return { ...state, donationPercentage: action.payload };
         case "set-allOrgsHashTable":
             return { ...state, allOrgsHashTable: action.payload };
+        case "set-proxyUrl":
+            return { ...state, proxyUrl: action.payload };
+        case "set-baseProPublicaUrl":
+            return { ...state, baseProPublicaUrl: action.payload };
+        case "set-selectedOrganizationDetails":
+            return { ...state, selectedOrganizationDetails: action.payload };
         default:
             return;
     }

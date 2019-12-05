@@ -46,7 +46,6 @@ export default function CharityCard() {
     const bull = <span className={classes.bullet}>•</span>;
     const pertOrgDetails = ["name", "ein", "address", "income_amount", "ntee_code"]
     const filteredProperties = Object.keys(state.selectedOrganizationDetails).filter(value => pertOrgDetails.includes(value))
-    console.log("Org Details", state.selectedOrganizationDetails)
     return (
         <Card className={classes.card}>
             <CardContent>

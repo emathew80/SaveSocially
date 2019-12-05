@@ -7,7 +7,7 @@ export default function TransactionContainer() {
 
     React.useEffect(
         () => {
-            if (!state.fromAccount || !state.fromAccount.accountId) return;
+            if (state.transactions || state.transactionsLoading || !state.fromAccount || !state.fromAccount.accountId || !state.submitted) return;
             let getTransactions = async () => {
                 const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
                 const targetUrl = `http://save-socially-api.herokuapp.com/transactions?consumerId=${state.consumerId}&accountId=${state.fromAccount.accountId}`
@@ -41,7 +41,7 @@ export default function TransactionContainer() {
             }
             getTransactions();
         },
-        [state.consumerId, state.fromAccount, state.fromAccount.accountId, dispatch]
+        [state.transactions, state.transactionsLoading, state.consumerId, state.fromAccount, state.fromAccount.accountId, state.submitted, dispatch]
     );
 
     return (

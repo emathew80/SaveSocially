@@ -16,9 +16,10 @@ let initialState = {
     toAccount: '',
     consumerId: '833',
     allOrgsHashTable: [],
-    totalRoundUpAmount:0,
+    totalRoundUpAmount: 0,
     selectedOrganizationDetails: [],
     transactions: [],
+    transactionsLoading: false,
     fromAccounts:
         [
             {
@@ -92,6 +93,8 @@ let reducer = (state, action) => {
             return { ...state, baseProPublicaUrl: action.payload };
         case "set-transactions":
             return { ...state, transactions: action.payload };
+        case "set-transactionsLoading":
+            return { ...state, transactionsLoading: action.payload };
         case "set-selectedOrganizationDetails":
             return { ...state, selectedOrganizationDetails: action.payload };
         case "set-submit":

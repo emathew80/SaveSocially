@@ -12,6 +12,7 @@ let initialState = {
     baseProPublicaUrl: 'https://projects.propublica.org/nonprofits/api/v2/',
     fromAccount: null,
     toAccount: null,
+    totalRoundUpAmount: 0,
     allOrgsHashTable: [],
     selectedOrganizationDetails: [],
     fromAccounts:
@@ -87,6 +88,8 @@ let reducer = (state, action) => {
             return { ...state, baseProPublicaUrl: action.payload };
         case "set-selectedOrganizationDetails":
             return { ...state, selectedOrganizationDetails: action.payload };
+        case "set-totalRoundUpAmount":
+            return { ...state, totalRoundUpAmount: action.payload };
         default:
             return;
     }

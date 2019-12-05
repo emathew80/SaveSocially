@@ -3,7 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { AppContext } from "../AppContext";
 
-function CharityCallout() {
+export default function CharityCallout() {
     let { state, dispatch } = React.useContext(AppContext);
     const charitySearch = (event) => {
        var targetUrl = state.baseProPublicaUrl + `search.json?q=${event.target.value}`
@@ -68,4 +68,4 @@ function CharityCallout() {
         </React.Fragment>
     )
 }
-export default CharityCallout
+

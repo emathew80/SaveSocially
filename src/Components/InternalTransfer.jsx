@@ -19,10 +19,10 @@ export default function InternalTransfer() {
                 description: "Save Socially Round Up Transfer",
             })
         });
-  const content = await rawResponse.json();
+        const content = await rawResponse.json();
 
-  console.log(content);
-}
+        console.log(content);
+    }
 
     return (
     <Button variant="contained" color="primary" size="large" onClick={transfer}>Click To Transfer Roundup</Button>

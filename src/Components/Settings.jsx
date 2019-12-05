@@ -1,12 +1,9 @@
 import React from 'react';
 import {
-  Box,
-  TextField,
   FormControl,
   InputLabel,
   Select,
   MenuItem,
-  FormLabel,
   Typography,
   Slider
 } from '@material-ui/core';
@@ -41,37 +38,27 @@ function Settings() {
   const classes = useStyles();
 
   const marks = [
-    {
-      value: 1,
-      label: '1%',
-    },
-    {
-      value: 25,
-      label: '25%',
-    },
-    {
-      value: 50,
-      label: '50%',
-    },
-    {
-      value: 75,
-      label: '75%',
-    },
-    {
-      value: 100,
-      label: '100%',
-    },
+    { value: 1, label: '1%' },
+    { value: 25, label: '25%' },
+    { value: 50, label: '50%' },
+    { value: 75, label: '75%' },
+    { value: 100, label: '100%' },
   ];
 
   let setFromAccount = accountId => () => dispatch({
-    type: "set-from-account",
-    payload:  state.fromAccounts.find(obj => obj.accountId === accountId)
-  });
+        type: "set-from-account",
+        payload:  state.fromAccounts.find(obj => obj.accountId === accountId)
+    });
 
   let setToAccount = accountId => () => dispatch({
-    type: "set-to-account",
-    payload:  state.toAccounts.find(obj => obj.accountId === accountId)
-  });
+        type: "set-to-account",
+        payload:  state.toAccounts.find(obj => obj.accountId === accountId)
+    });
+
+  let setDonationPercentage = (e, value) => dispatch({
+        type: "set-donation-percentage",
+        payload:   value / Math.pow(10, 2)
+    });
 
     let setSliderPercentage = percentage => {
         dispatch({
@@ -82,12 +69,15 @@ function Settings() {
 
   let setLabelWidth = () => {
     return (dispatch({
-    type: 'set-tolabel-width',
-    payload: inputLabelTo.current.offsetWidth
-  }), dispatch({
-    type: 'set-fromlabel-width',
-    payload: inputLabelFrom.current.offsetWidth
-  }))}
+                type: 'set-tolabel-width',
+                payload: inputLabelTo.current.offsetWidth
+            }),
+            dispatch({
+                type: 'set-fromlabel-width',
+                payload: inputLabelFrom.current.offsetWidth
+            })
+        )
+    }
 
   const inputLabelFrom = React.useRef(null);
   const inputLabelTo = React.useRef(null);
@@ -145,10 +135,14 @@ function Settings() {
 
       <FormControl className={classes.formControlSlider}>
         <Typography id="discrete-slider-small-steps">
-          Donation Percentage
+          {`Donation Percentage: ${Math.round(state.donationPercentage * 100)}%`}
         </Typography>
+
         <div className={classes.margin} />
+
         <Slider
+          onChange={(event, value) => setDonationPercentage(event, value)}
+          onChangeCommitted={(event, value) => setDonationPercentage(event, value)}
           defaultValue={5}
           getAriaValueText={valueLabelFormat}
           aria-labelledby="discrete-slider-small-steps"

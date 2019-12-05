@@ -8,12 +8,14 @@ let initialState = {
     labelToWidth: 0,
     labelFromWidth: 0,
     donationPercentage: 0.05,
+    submitted: false,
+    edit: true,
     proxyUrl: 'https://cors-anywhere.herokuapp.com/',
     baseProPublicaUrl: 'https://projects.propublica.org/nonprofits/api/v2/',
     fromAccount: null,
     toAccount: null,
-    totalRoundUpAmount: 0,
     allOrgsHashTable: [],
+    totalRoundUpAmount:0,
     selectedOrganizationDetails: [],
     fromAccounts:
         [
@@ -88,8 +90,12 @@ let reducer = (state, action) => {
             return { ...state, baseProPublicaUrl: action.payload };
         case "set-selectedOrganizationDetails":
             return { ...state, selectedOrganizationDetails: action.payload };
+        case "set-submit":
+            return { ...state, submitted: action.payload,  edit: !action.payload };
+        case "set-edit":
+            return { ...state, edit: action.payload, submitted: !action.payload };
         case "set-totalRoundUpAmount":
-            return { ...state, totalRoundUpAmount: action.payload };
+            return { ...state, totalRoundUpAmount: action.payload, submitted: !action.payload };
         default:
             return;
     }

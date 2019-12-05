@@ -10,6 +10,7 @@ let initialState = {
     donationPercentage: 0.05,
     submitted: false,
     edit: true,
+    error: false,
     proxyUrl: 'https://cors-anywhere.herokuapp.com/',
     baseProPublicaUrl: 'https://projects.propublica.org/nonprofits/api/v2/',
     fromAccount: '',
@@ -103,6 +104,8 @@ let reducer = (state, action) => {
             return { ...state, edit: action.payload, submitted: !action.payload };
         case "set-totalRoundUpAmount":
             return { ...state, totalRoundUpAmount: action.payload, submitted: !action.payload };
+        case "set-form-error":
+            return { ...state, error: action.payload };
         default:
             return;
     }

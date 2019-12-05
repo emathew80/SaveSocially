@@ -21,7 +21,7 @@ import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 
 import Container from '@material-ui/core/Container';
 
-import Settings from "./Settings";
+import SettingsForm from "./SettingsForm";
 import Dashboard from './Dashboard';
 
 const drawerWidth = 240;
@@ -163,7 +163,7 @@ export default function MainLayout({ children }) {
                     <Container>
                         <Switch>
                             <Route path='/' exact component={Dashboard} />
-                            <Route path='/settings' component={Settings} />
+                            <Route path='/settings' component={SettingsForm} />
                         </Switch>
                     </Container>
                 </main>

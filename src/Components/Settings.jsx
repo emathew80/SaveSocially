@@ -77,7 +77,7 @@ function Settings() {
 
     React.useEffect(() => {
         setLabelWidth()
-    });
+    }, []);
 
     const valueLabelFormat = (value) => {
         return `${value}%`;

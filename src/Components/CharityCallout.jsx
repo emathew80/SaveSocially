@@ -30,12 +30,17 @@ function CharityCallout() {
             });
     }
 
+    const autoCompleteOnChangeHandler = (_, value) => {
+        console.log(state.allOrgsHashTable);
+    }
+
     return (
         <React.Fragment>
             <Autocomplete
                 id="free-solo-2-demo"
                 disableClearable
                 options={Object.keys(state.allOrgsHashTable).map(orgName => orgName)}
+                onChange={autoCompleteOnChangeHandler}
                 renderInput={params => (
                     <TextField
                         {...params}

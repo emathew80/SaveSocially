@@ -7,10 +7,7 @@ import {
     Typography,
     Slider,
     Button,
-    Icon,
-    Fab,
     Grid,
-    Paper,
     Card,
     CardContent,
     FormHelperText
@@ -97,18 +94,6 @@ function SettingsForm() {
         payload: value / Math.pow(10, 2)
     });
 
-    let setLabelWidth = () => {
-        return (dispatch({
-            type: 'set-tolabel-width',
-            payload: inputLabelTo.current.offsetWidth
-        }),
-            dispatch({
-                type: 'set-fromlabel-width',
-                payload: inputLabelFrom.current.offsetWidth
-            })
-        )
-    }
-
     let getTransactions = async () => {
         const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
         const targetUrl = `http://save-socially-api.herokuapp.com/transactions?consumerId=${state.consumerId}&accountId=${state.fromAccount.accountId}`
@@ -167,8 +152,15 @@ function SettingsForm() {
     const inputLabelTo = React.useRef(null);
 
     React.useEffect(() => {
-        setLabelWidth()
-    }, []);
+        dispatch({
+            type: 'set-tolabel-width',
+            payload: inputLabelTo.current.offsetWidth
+        });
+        dispatch({
+            type: 'set-fromlabel-width',
+            payload: inputLabelFrom.current.offsetWidth
+        });
+    }, [inputLabelFrom, inputLabelTo, dispatch]);
 
     const percentageFormat = (value) => {
         return `${value}%`;

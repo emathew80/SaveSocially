@@ -1,14 +1,9 @@
 import * as React from "react";
 
-import CharityCallout from "./Components/CharityCallout";
-import Settings from "./Components/Settings";
-import ActivityList from './Components/ActivityList';
-import CharityCard from './Components/CharityCard';
 import MainLayout from './Components/MainLayout';
-import Container from '@material-ui/core/Container';
 
 import './App.css';
-import TransactionRoundUpCalculator from "./Components/TransactionRoundUpCalculator";
+
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -26,14 +21,7 @@ export function App() {
     return (
         <div className="App">
             <ThemeProvider theme={theme}>
-                <MainLayout>
-                    <Container>
-                        <TransactionRoundUpCalculator />
-                        <ActivityList />
-                        <Settings />
-                        <CharityCard />
-                    </Container>
-                </MainLayout>
+                <MainLayout />
             </ThemeProvider>
         </div>
     );

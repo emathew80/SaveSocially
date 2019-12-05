@@ -18,6 +18,13 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { getThemeProps } from '@material-ui/styles';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+
+import Container from '@material-ui/core/Container';
+
+import Settings from "./Settings";
+import ActivityList from './ActivityList';
+import TransactionRoundUpCalculator from "./TransactionRoundUpCalculator";
 
 const drawerWidth = 240;
 
@@ -91,63 +98,74 @@ export default function MainLayout({ children }) {
     };
 
     return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
-            >
-                <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Save Socially
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="left"
-                open={open}
-                classes={{
-                    paper: classes.drawerPaper,
-                }}
-            >
-                <div className={classes.drawerHeader}>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>
-                    <ListItem button>
-                        <ListItemIcon><DashboardIcon /></ListItemIcon>
-                        <ListItemText primary="Dashboard" />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon><SettingsIcon /></ListItemIcon>
-                        <ListItemText primary="Settings" />
-                    </ListItem>
-                </List>
-            </Drawer>
-            <main
-                className={clsx(classes.content, {
-                    [classes.contentShift]: open,
-                })}
-            >
-                <div className={classes.drawerHeader} />
-                {children}
-            </main>
-        </div>
+        <BrowserRouter>
+            <div className={classes.root}>
+                <CssBaseline />
+                <AppBar
+                    position="fixed"
+                    className={clsx(classes.appBar, {
+                        [classes.appBarShift]: open,
+                    })}
+                >
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            className={clsx(classes.menuButton, open && classes.hide)}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" noWrap>
+                            Save Socially
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    className={classes.drawer}
+                    variant="persistent"
+                    anchor="left"
+                    open={open}
+                    classes={{
+                        paper: classes.drawerPaper,
+                    }}
+                >
+                    <div className={classes.drawerHeader}>
+                        <IconButton onClick={handleDrawerClose}>
+                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                        </IconButton>
+                    </div>
+                    <Divider />
+                    <List>
+                        <Link to='/'>
+                            <ListItem button>
+                                <ListItemIcon><DashboardIcon /></ListItemIcon>
+                                <ListItemText primary="Settings" />
+                            </ListItem>
+                        </Link>
+                        <Link to='/activity'>
+                            <ListItem button>
+                                <ListItemIcon><SettingsIcon /></ListItemIcon>
+                                <ListItemText primary="Activity" />
+                            </ListItem>
+                        </Link>
+                    </List>
+                </Drawer>
+                <main
+                    className={clsx(classes.content, {
+                        [classes.contentShift]: open,
+                    })}
+                >
+                    <div className={classes.drawerHeader} />
+                        <Container>
+                            <Switch>
+                                <Route path='/' exact component={Settings} />
+                                <Route path='/activity' component={ActivityList} />
+                            </Switch>
+                        </Container>
+                </main>
+            </div>
+        </BrowserRouter>
     );
 }

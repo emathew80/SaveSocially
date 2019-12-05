@@ -67,7 +67,7 @@ let reducer = (state, action) => {
       return { ...state, currentColor: action.payload };
     case "set-from-account":
       return { ...state, fromAccount: action.payload };
-    case "set-from-account":
+    case "set-to-account":
       return { ...state, toAccount: action.payload };
     case "set-fromlabel-width":
       return { ...state, labelFromWidth: action.payload };

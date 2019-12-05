@@ -1,7 +1,9 @@
 import React from 'react';
 import MaterialTable from 'material-table';
+import { AppContext } from '../AppContext';
 
 export default function ActivityList({ transactions }) {
+    let { state, dispatch } = React.useContext(AppContext);
     const columns = [
         {
             title: 'Date',
@@ -27,27 +29,35 @@ export default function ActivityList({ transactions }) {
         },
     ]
 
-    const mappedTransactions = transactions.map(transaction => ({
-        ...transaction,
-        transactionAmount: parseFloat(transaction.transactionAmount).toFixed(2),
-        roundupAmount: parseFloat((Math.ceil(transaction.transactionAmount) - transaction.transactionAmount)).toFixed(2)
-    }));
+    React.useEffect(() => {
+        const mappedTransactions = transactions.map(transaction => ({
+            ...transaction,
+            transactionAmount: parseFloat(transaction.transactionAmount).toFixed(2),
+            roundupAmount: parseFloat((Math.ceil(transaction.transactionAmount) - transaction.transactionAmount)).toFixed(2)
+        }));
 
-    const totalRoundup = () => {
         if (mappedTransactions && mappedTransactions.length) {
-            return mappedTransactions
+            console.log('doing')
+            const total = mappedTransactions
                 .map(transaction => parseFloat(transaction.roundupAmount))
                 .reduce((prev, curr) => prev + curr)
                 .toFixed(2);
+            dispatch({
+                type: 'set-totalRoundUpAmount',
+                payload: parseFloat(total),
+            })
+            dispatch({
+                type: 'set-mappedTransactions',
+                payload: mappedTransactions,
+            })
         }
-        return 0;
-    }
+    }, [transactions, dispatch])
 
     return (
         <MaterialTable
-            title={`Transactions - Total Roundup ($${totalRoundup()})`}
+            title={`Transactions - Total Roundup ($${state.totalRoundUpAmount})`}
             columns={columns}
-            data={mappedTransactions}
+            data={state.mappedTransactions}
         />
     );
 }

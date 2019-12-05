@@ -20,6 +20,7 @@ let initialState = {
     totalRoundUpAmount: 0,
     selectedOrganizationDetails: [],
     transactions: [],
+    mappedTransactions: [],
     transactionsLoading: false,
     fromAccounts:
         [
@@ -68,14 +69,6 @@ let initialState = {
 
 let reducer = (state, action) => {
     switch (action.type) {
-        case "reset":
-            return initialState;
-        case "increment":
-            return { ...state, count: state.count + 1 };
-        case "decrement":
-            return { ...state, count: state.count - 1 };
-        case "set-color":
-            return { ...state, currentColor: action.payload };
         case "set-from-account":
             return { ...state, fromAccount: action.payload };
         case "set-to-account":
@@ -94,6 +87,8 @@ let reducer = (state, action) => {
             return { ...state, baseProPublicaUrl: action.payload };
         case "set-transactions":
             return { ...state, transactions: action.payload };
+        case "set-mappedTransactions":
+            return { ...state, mappedTransactions: action.payload };
         case "set-transactionsLoading":
             return { ...state, transactionsLoading: action.payload };
         case "set-selectedOrganizationDetails":

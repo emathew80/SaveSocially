@@ -1,19 +1,19 @@
 import React from 'react';
 import {
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Typography,
-  Slider,
-  Button,
-  Icon,
-  Fab,
-  Grid,
-  Paper,
-  Card,
-  CardContent,
-  FormHelperText
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    Typography,
+    Slider,
+    Button,
+    Icon,
+    Fab,
+    Grid,
+    Paper,
+    Card,
+    CardContent,
+    FormHelperText
 } from '@material-ui/core';
 import { Save, Edit } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
@@ -77,7 +77,7 @@ function SettingsForm() {
     ];
 
     let setFromAccount = e => {
-        dispatch({ type: "set-form-error", payload: false})
+        dispatch({ type: "set-form-error", payload: false })
         dispatch({
             type: "set-from-account",
             payload: state.fromAccounts.find(account => account.accountId === e.target.value)
@@ -85,7 +85,7 @@ function SettingsForm() {
     }
 
     let setToAccount = e => {
-        dispatch({ type: "set-form-error", payload: false})
+        dispatch({ type: "set-form-error", payload: false })
         dispatch({
             type: "set-to-account",
             payload: state.toAccounts.find(account => account.accountId === e.target.value)
@@ -150,11 +150,11 @@ function SettingsForm() {
     }
 
     let submitForm = () => {
-        dispatch({ type: "set-form-error", payload: false})
+        dispatch({ type: "set-form-error", payload: false })
 
         if (!state.toAccount || !state.fromAccount) {
             console.log('in here')
-            return dispatch({ type: "set-form-error", payload: true})
+            return dispatch({ type: "set-form-error", payload: true })
         }
 
         dispatch({ type: "set-submit", payload: true });
@@ -174,136 +174,136 @@ function SettingsForm() {
         return `${value}%`;
     }
 
-  const renderForm = () => {
-      return (
-        <div className={classes.form}>
-            <Typography variant="h6" className={classes.formLabel}>
-                Donation Transfer Settings
+    const renderForm = () => {
+        return (
+            <div className={classes.form}>
+                <Typography variant="h6" className={classes.formLabel}>
+                    Donation Transfer Settings
             </Typography>
-
-            <div className={classes.margin} />
-
-            <FormControl variant="outlined"  className={classes.formControl}>
-                <InputLabel ref={inputLabelFrom}  id="from-select-label">From Account</InputLabel>
-                <Select
-                    required
-                    label='From Account'
-                    id="simple-select"
-                    labelWidth={state.labelFromWidth}
-                    value={state.fromAccount && state.fromAccount.accountId}
-                    onChange={setFromAccount}
-                >
-                {state.fromAccounts.map((account, i)=> {
-                    return <MenuItem key={i} value={account.accountId}>{account.formattedAccountNumber}</MenuItem>
-                })}
-                </Select>
-                {state.error && <FormHelperText className={classes.error}>From Account is Required</FormHelperText>}
-            </FormControl>
-
-            <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel ref={inputLabelTo}  id="from-select-label">To Account</InputLabel>
-                <Select
-                    required
-                    defaultValue={state.toAccount}
-                    label='To Account'
-                    id="simple-select"
-                    labelWidth={state.labelToWidth}
-                    value={state.toAccount && state.toAccount.accountId}
-                    onChange={setToAccount}
-                >
-                {state.toAccounts.map((account, i) => {
-                    return <MenuItem key={i} value={account.accountId}>{account.formattedAccountNumber}</MenuItem>
-                })}
-                </Select>
-                {state.error && <FormHelperText className={classes.error}>To Account is Required</FormHelperText>}
-            </FormControl>
-
-            <div className={classes.margin} />
-
-            <FormControl className={classes.formControlSlider}>
-                <Typography id="discrete-slider-small-steps">
-                {`Donation Percentage: ${Math.round(state.donationPercentage * 100)}%`}
-                </Typography>
 
                 <div className={classes.margin} />
 
-                <Slider
-                    onChange={(event, value) => setDonationPercentage(event, value)}
-                    onChangeCommitted={(event, value) => setDonationPercentage(event, value)}
-                    defaultValue={5}
-                    getAriaValueText={percentageFormat}
-                    aria-labelledby="discrete-slider-small-steps"
-                    step={1}
-                    marks={marks}
-                    min={1}
-                    max={100}
-                    value={Math.round(state.donationPercentage * 100)}
-                    valueLabelFormat={percentageFormat}
-                    valueLabelDisplay="auto"
-                />
-            </FormControl>
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel ref={inputLabelFrom} id="from-select-label">From Account</InputLabel>
+                    <Select
+                        required
+                        label='From Account'
+                        id="simple-select"
+                        labelWidth={state.labelFromWidth}
+                        value={state.fromAccount && state.fromAccount.accountId}
+                        onChange={setFromAccount}
+                    >
+                        {state.fromAccounts.map((account, i) => {
+                            return <MenuItem key={i} value={account.accountId}>{account.formattedAccountNumber}</MenuItem>
+                        })}
+                    </Select>
+                    {state.error && <FormHelperText className={classes.error}>From Account is Required</FormHelperText>}
+                </FormControl>
 
-            <div className={classes.margin} />
+                <FormControl variant="outlined" className={classes.formControl}>
+                    <InputLabel ref={inputLabelTo} id="from-select-label">To Account</InputLabel>
+                    <Select
+                        required
+                        defaultValue={state.toAccount}
+                        label='To Account'
+                        id="simple-select"
+                        labelWidth={state.labelToWidth}
+                        value={state.toAccount && state.toAccount.accountId}
+                        onChange={setToAccount}
+                    >
+                        {state.toAccounts.map((account, i) => {
+                            return <MenuItem key={i} value={account.accountId}>{account.formattedAccountNumber}</MenuItem>
+                        })}
+                    </Select>
+                    {state.error && <FormHelperText className={classes.error}>To Account is Required</FormHelperText>}
+                </FormControl>
 
-            <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={submitForm}
-                className={classes.button}
-                startIcon={<Save />}
-            >
-                Save
+                <div className={classes.margin} />
+
+                <FormControl className={classes.formControlSlider}>
+                    <Typography id="discrete-slider-small-steps">
+                        {`Donation Percentage: ${Math.round(state.donationPercentage * 100)}%`}
+                    </Typography>
+
+                    <div className={classes.margin} />
+
+                    <Slider
+                        onChange={(event, value) => setDonationPercentage(event, value)}
+                        onChangeCommitted={(event, value) => setDonationPercentage(event, value)}
+                        defaultValue={5}
+                        getAriaValueText={percentageFormat}
+                        aria-labelledby="discrete-slider-small-steps"
+                        step={1}
+                        marks={marks}
+                        min={1}
+                        max={100}
+                        value={Math.round(state.donationPercentage * 100)}
+                        valueLabelFormat={percentageFormat}
+                        valueLabelDisplay="auto"
+                    />
+                </FormControl>
+
+                <div className={classes.margin} />
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    onClick={submitForm}
+                    className={classes.button}
+                    startIcon={<Save />}
+                >
+                    Save
             </Button>
-        </div>
-      )
-  }
+            </div>
+        )
+    }
 
-  const renderDetails = () => {
-    return (
-        <div className={classes.form}>
-          <Typography gutterBottom>
-              Donation Transfer Settings
+    const renderDetails = () => {
+        return (
+            <div className={classes.form}>
+                <Typography gutterBottom>
+                    Donation Transfer Settings
           </Typography>
-          <Typography gutterBottom>
-              From Account: {state.fromAccount.formattedAccountNumber}
-          </Typography>
-          <Typography gutterBottom>
-              To Account: {state.toAccount.formattedAccountNumber}
-          </Typography>
-          <Typography gutterBottom>
-              Donation Percentage: {(state.donationPercentage*100).toFixed()}%
+                <Typography gutterBottom>
+                    From Account: {state.fromAccount.formattedAccountNumber}
+                </Typography>
+                <Typography gutterBottom>
+                    To Account: {state.toAccount.formattedAccountNumber}
+                </Typography>
+                <Typography gutterBottom>
+                    Donation Percentage: {(state.donationPercentage * 100).toFixed()}%
           </Typography>
 
-          <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={editForm}
-                className={classes.button}
-                startIcon={<Edit />}
-            >
-                Edit
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="large"
+                    onClick={editForm}
+                    className={classes.button}
+                    startIcon={<Edit />}
+                >
+                    Edit
           </Button>
-       </div>
-    )
-  }
+            </div>
+        )
+    }
 
-  return (
-    <Card className={classes.card}>
-        <CardContent>
-            <Grid container spacing={3} className={classes.gridRoot}>
-                <Grid item xs={12}>
-                    <Grid justify='center' container spacing={3}>
-                        <Grid  item xs={12}>
-                        {state.edit ? renderForm() : renderDetails()}
+    return (
+        <Card className={classes.card}>
+            <CardContent>
+                <Grid container spacing={3} className={classes.gridRoot}>
+                    <Grid item xs={12}>
+                        <Grid justify='center' container spacing={3}>
+                            <Grid item xs={12}>
+                                {state.edit ? renderForm() : renderDetails()}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
-            </Grid>
-        </CardContent>
-    </Card>
-  )
+            </CardContent>
+        </Card>
+    )
 
 }
 

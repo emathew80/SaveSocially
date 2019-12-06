@@ -95,45 +95,45 @@ function SettingsForm() {
         payload: value / Math.pow(10, 2)
     });
 
-    // let getTransactions = async () => {
-    //     const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-    //     const targetUrl = `http://save-socially-api.herokuapp.com/transactions?consumerId=${state.consumerId}&accountId=${state.fromAccount.accountId}`
-    //     dispatch({
-    //         type: 'set-transactionsLoading',
-    //         payload: true,
-    //     })
-    //     return await fetch(proxyUrl + targetUrl)
-    //         .then(blob => blob.json())
-    //         .then(data => {
-    //             const transactions = data.map(transaction => {
-    //                 const {
-    //                     accountId,
-    //                     transactionDate,
-    //                     transactionAmount,
-    //                     description,
-    //                 } = transaction;
+    let getTransactions = async () => {
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
+        const targetUrl = `http://save-socially-api.herokuapp.com/transactions?consumerId=${state.consumerId}&accountId=${state.fromAccount.accountId}`
+        dispatch({
+            type: 'set-transactionsLoading',
+            payload: true,
+        })
+        return await fetch(proxyUrl + targetUrl)
+            .then(blob => blob.json())
+            .then(data => {
+                const transactions = data.map(transaction => {
+                    const {
+                        accountId,
+                        transactionDate,
+                        transactionAmount,
+                        description,
+                    } = transaction;
 
-    //                 return {
-    //                     accountId,
-    //                     transactionDate,
-    //                     transactionAmount,
-    //                     description,
-    //                 }
-    //             });
-    //             dispatch({
-    //                 type: 'set-transactions',
-    //                 payload: transactions,
-    //             })
-    //             dispatch({
-    //                 type: 'set-transactionsLoading',
-    //                 payload: false,
-    //             })
-    //         })
-    //         .catch(e => {
-    //             console.log(e);
-    //             return e;
-    //         });
-    // }
+                    return {
+                        accountId,
+                        transactionDate,
+                        transactionAmount,
+                        description,
+                    }
+                });
+                dispatch({
+                    type: 'set-transactions',
+                    payload: transactions,
+                })
+                dispatch({
+                    type: 'set-transactionsLoading',
+                    payload: false,
+                })
+            })
+            .catch(e => {
+                console.log(e);
+                return e;
+            });
+    }
 
     let submitForm = () => {
         dispatch({ type: "set-form-error", payload: false })
@@ -143,7 +143,7 @@ function SettingsForm() {
         }
 
         dispatch({ type: "set-submit", payload: true });
-        // getTransactions();
+        getTransactions();
     }
 
     let editForm = () => dispatch({ type: "set-edit", payload: true })
